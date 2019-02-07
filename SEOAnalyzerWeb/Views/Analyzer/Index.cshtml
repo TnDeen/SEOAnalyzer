@@ -1,0 +1,82 @@
+﻿@model SEOAnalyzerWeb.Models.ViewModel.AnalyzerViewModel
+
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Results</h2>
+
+<div>
+    @if (Model.Analyzer.IsCountNumberofWords)
+    {
+
+        <h4>All Words (@Model.AllWordsInfo.Count())</h4>
+        <hr />
+        <table class="table">
+            <tr>
+                <th>@Html.ActionLink("Word", "Index", new { WordSortBy = ViewBag.WordSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+                <th>@Html.ActionLink("Count", "Index", new { WordSortBy = ViewBag.CountSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+            </tr>
+            @foreach (var item in Model.AllWordsInfo)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+
+    }
+
+    @if (Model.Analyzer.IsMetaTagsInfo)
+    {
+        <h4>Meta Tags (@Model.AllMetaTagsInfo.Count())</h4>
+        <hr />
+        <table class="table">
+            <tr>
+                <th>@Html.ActionLink("Name", "Index", new { MetaSortBy = ViewBag.MetaWordSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+                <th>Property</th>
+                <th>ItemProp</th>
+                <th>HttpEquiv</th>
+                <th>Content</th>
+                <th>@Html.ActionLink("TotalWordCount", "Index", new { MetaSortBy = ViewBag.MetaCountSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+            </tr>
+            @foreach (var item in Model.AllMetaTagsInfo)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Property</td>
+                    <td>@item.ItemProp</td>
+                    <td>@item.HttpEquiv</td>
+                    <td>@item.Content</td>
+                    <td>@item.TotalWordCount</td>
+                </tr>
+            }
+        </table>
+
+    }
+
+    @if (Model.Analyzer.IsGetExternalLink)
+    {
+        <h4>Links (@Model.AllExternalLinks.Count())</h4>
+        <hr />
+        <table class="table">
+            <tr>
+                <th>@Html.ActionLink("Link", "Index", new { LinkSortBy = ViewBag.LinkWordSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+                <th>@Html.ActionLink("Count", "Index", new { LinkSortBy = ViewBag.LinkCountSortParm, SearchText = Model.Analyzer.SearchText, IsURL = Model.Analyzer.IsURL, IsPageFilterStopWords = Model.Analyzer.IsPageFilterStopWords, IsCountNumberofWords = Model.Analyzer.IsCountNumberofWords, IsMetaTagsInfo = Model.Analyzer.IsMetaTagsInfo, IsGetExternalLink = Model.Analyzer.IsGetExternalLink })</th>
+            </tr>
+            @foreach (var item in Model.AllExternalLinks)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Back to form", "Create")
+</p>
